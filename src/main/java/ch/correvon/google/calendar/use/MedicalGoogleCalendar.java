@@ -9,7 +9,7 @@ import ch.correvon.google.calendar.window.mainWindow.MainWindow;
 public class MedicalGoogleCalendar
 {
 	private static Log s_logger = LogFactory.getLog(MedicalGoogleCalendar.class);
-	public static final String APPLICATION_NAME = "PUMBAA google cal Quick Entry (Medical Google Calendar)";
+	public static final String APPLICATION_NAME = "PUMBAA google-cal Quick Entry (Medical Google Calendar)";
 	private static final String VERSION = "1.0.0";
 
 	/*
