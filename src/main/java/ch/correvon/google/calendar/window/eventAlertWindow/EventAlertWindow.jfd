@@ -1,0 +1,98 @@
+JFDML JFormDesigner: "5.2.0.0.109" Java: "1.8.0_05" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JDialog", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
+			"$columnSpecs": "unrelgap, labelcompgap, default, labelcompgap, default:grow, labelcompgap, 22dlu, labelcompgap, default, labelcompgap, default, labelcompgap, unrelgap"
+			"$rowSpecs": "unrelgap, linegap, default, linegap, default, linegap, fill:default:grow, linegap, default, linegap, unrelgap"
+			"$columnGroupIds": "0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0"
+		} ) {
+			name: "this"
+			"title": "Alertes de rendez-vous"
+			"$sizePolicy": 1
+			"$locationPolicy": 0
+			"modal": true
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "labelType"
+				"text": "Horaires"
+				"font": new java.awt.Font( "Tahoma", 1, 14 )
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridX": 3
+				"gridY": 3
+				"gridWidth": 3
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "buttonAddReminder"
+				"text": "+"
+				"margin": &Insets0 new java.awt.Insets( 0, 2, 0, 2 )
+				"toolTipText": "Ajouter un horaire"
+				auxiliary() {
+					"JavaCodeGenerator.variableLocal": true
+				}
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "buttonAddReminderActionPerformed", true ) )
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridX": 9
+				"gridY": 3
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "buttonRemoveReminder"
+				"text": "-"
+				"margin": #Insets0
+				"toolTipText": "Supprimer un horaire"
+				auxiliary() {
+					"JavaCodeGenerator.variableLocal": true
+				}
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "buttonRemoveReminderActionPerformed", true ) )
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridX": 11
+				"gridY": 3
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "labelDesc"
+				"text": "description"
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridX": 3
+				"gridY": 5
+				"gridWidth": 9
+			} )
+			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+				name: "scrollPane1"
+				add( new FormComponent( "javax.swing.JTable" ) {
+					name: "table"
+				} )
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridX": 3
+				"gridY": 7
+				"gridWidth": 9
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "buttonOk"
+				"text": "Ok"
+				auxiliary() {
+					"JavaCodeGenerator.variableLocal": true
+				}
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "buttonOkActionPerformed", true ) )
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridX": 3
+				"gridY": 9
+				"gridWidth": 3
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "buttonCancel"
+				"text": "Annuler"
+				auxiliary() {
+					"JavaCodeGenerator.variableLocal": true
+				}
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "buttonCancelActionPerformed", true ) )
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridX": 7
+				"gridY": 9
+				"gridWidth": 5
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 0 )
+			"size": new java.awt.Dimension( 200, 275 )
+		} )
+	}
+}
