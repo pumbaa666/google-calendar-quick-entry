@@ -3,7 +3,6 @@ package ch.correvon.google.calendar.window.mainWindow;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
-import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Insets;
@@ -28,6 +27,7 @@ import java.io.OutputStreamWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -46,21 +46,16 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
-import javax.swing.WindowConstants;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableModel;
 import javax.swing.text.JTextComponent;
-import ch.correvon.google.calendar.components.TimedLabel;
-import ch.correvon.google.calendar.components.date.MyMonthPicker;
-import ch.correvon.google.calendar.components.date.MyYearPicker;
 import com.google.api.client.util.DateTime;
 import com.google.api.services.calendar.model.CalendarListEntry;
 import com.google.api.services.calendar.model.Event;
 import com.google.api.services.calendar.model.EventDateTime;
-import com.google.api.services.calendar.model.EventReminder;
 import com.jgoodies.forms.factories.CC;
 import com.jgoodies.forms.layout.FormLayout;
 import com.toedter.calendar.JDayChooser;
@@ -688,19 +683,16 @@ public class MainWindow extends JFrame implements KeyListener, WindowListener
 			{
 				@Override protected Void doInBackground()
 				{
-					Date minDate = null;
-					Date maxDate = null;
-					try
-					{
-						minDate = DATE_SDF.parse("01." + (MainWindow.this.monthChooser.getMonth() + 1) + "." + MainWindow.this.yearChooser.getYear());
-						maxDate = DATE_SDF.parse(MainWindow.this.dayChooser.getMaxDayOfMonth() + "." + (MainWindow.this.monthChooser.getMonth() + 1) + "." + MainWindow.this.yearChooser.getYear());
-						maxDate.setTime(maxDate.getTime() + + 24 * 3600 * 1000 - 1); // Pour aller jusqu'à la fin de la journée, sinon on ne voit pas les event du dernier jour du mois
-					}
-					catch(ParseException e)
-					{
-						return null;
-					}
+					Calendar cal = Calendar.getInstance();
+					cal.set(MainWindow.this.yearChooser.getYear(), MainWindow.this.monthChooser.getMonth(), 1, 0, 0, 0);
+					Date minDate = cal.getTime();
+					
+					cal.add(Calendar.MONTH, 1); // mois suivant
+					cal.add(Calendar.SECOND, -1); // moins une seconde pour arriver au jour précédent à la fin de la journée, pour voir tous les events
+					Date maxDate = cal.getTime();
 
+					s_logger.debug("minDate : "+minDate);
+					s_logger.debug("maxDate : "+maxDate);
 					MainWindow.this.events = MainWindow.this.service.getNextEvents(-1, minDate, maxDate, "");
 					return null;
 				}
