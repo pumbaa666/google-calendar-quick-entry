@@ -3,6 +3,7 @@ package ch.correvon.google.calendar.window.mainWindow;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Insets;
@@ -15,6 +16,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.awt.font.TextAttribute;
+import java.beans.PropertyChangeListener;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -46,6 +48,7 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
+import javax.swing.WindowConstants;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -992,7 +995,6 @@ public class MainWindow extends JFrame implements KeyListener, WindowListener
 	/* ------------------------------------------------------------ *\
 	|* 		  			GUI Creation & init							*|
 	\* ------------------------------------------------------------ */
-	@SuppressWarnings("all")// A cause du fuckin watermark
 	private void initComponents()
 	{
 		// JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
@@ -1000,6 +1002,7 @@ public class MainWindow extends JFrame implements KeyListener, WindowListener
 		JMenuBar menuBar = new JMenuBar();
 		JMenu menuFile = new JMenu();
 		JMenuItem menuFileQuit = new JMenuItem();
+		this.panelConnection = new JPanel();
 		this.buttonConnect = new JLabel();
 		this.labelAccount = new JLabel();
 		this.labelAccountValue = new JLabel();
@@ -1007,10 +1010,11 @@ public class MainWindow extends JFrame implements KeyListener, WindowListener
 		this.comboCalendars = new JComboBox<>();
 		this.monthChooser = new MyMonthPicker();
 		this.yearChooser = new MyYearPicker();
+		this.dayChooser = new JDayChooser();
+		this.panelScheduleFunction = new JPanel();
 		JLabel label3 = new JLabel();
 		JButton buttonAddSchedule = new JButton();
 		JButton buttonRemoveSchedule = new JButton();
-		this.dayChooser = new JDayChooser();
 		JScrollPane scrollPane2 = new JScrollPane();
 		this.tableSchedule = new JTable();
 		JLabel label4 = new JLabel();
@@ -1021,13 +1025,11 @@ public class MainWindow extends JFrame implements KeyListener, WindowListener
 		this.labelMessage = new TimedLabel();
 
 		//======== this ========
-		setDefaultCloseOperation(3);
+		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		Container contentPane = getContentPane();
 		contentPane.setLayout(new FormLayout(
-			"$ugap, 2*($lcgap, default), $lcgap, right:default, $lcgap, default, $lcgap, default:grow, $lcgap, default, $lcgap, 124dlu, 3*($lcgap, default), $lcgap, 58dlu, $lcgap, $ugap",
-			"default, $lgap, fill:7dlu, $lgap, 10dlu, $lgap, top:default:grow(0.66), $lgap, 10dlu, $lgap, default, $lgap, default:grow(0.34), $lgap, 13dlu"));
-		((FormLayout)contentPane.getLayout()).setColumnGroups(new int[][] {{19, 21}});
-		((FormLayout)contentPane.getLayout()).setRowGroups(new int[][] {{5, 9}, {7, 13}});
+			"$ugap, $lcgap, default, $lcgap, right:default, $lcgap, default, $lcgap, default:grow, $lcgap, default, $lcgap, 124dlu, $lcgap, default:grow, $lcgap, 58dlu:grow(0.33), $lcgap, $ugap",
+			"fill:30dlu, $lgap, fill:25dlu, $lgap, fill:default:grow, $lgap, default, $lgap, $ugap"));
 
 		//======== menuBar ========
 
@@ -1046,36 +1048,53 @@ public class MainWindow extends JFrame implements KeyListener, WindowListener
 		menuBar.add(menuFile);
 		setJMenuBar(menuBar);
 
+		//======== panelConnection ========
+
+		// JFormDesigner evaluation mark
+		this.panelConnection.setBorder(new javax.swing.border.CompoundBorder(
+			new javax.swing.border.TitledBorder(new javax.swing.border.EmptyBorder(0, 0, 0, 0),
+				"JFormDesigner Evaluation", javax.swing.border.TitledBorder.CENTER,
+				javax.swing.border.TitledBorder.BOTTOM, new java.awt.Font("Dialog", java.awt.Font.BOLD, 12),
+				java.awt.Color.red), this.panelConnection.getBorder())); this.panelConnection.addPropertyChangeListener(new java.beans.PropertyChangeListener(){public void propertyChange(java.beans.PropertyChangeEvent e){if("border".equals(e.getPropertyName()))throw new RuntimeException();}});
+
+		this.panelConnection.setLayout(new FormLayout(
+			"2*(default, $lcgap), default:grow(0.75), $lcgap, default:grow",
+			"3*(default, $lgap), default"));
+
 		//---- buttonConnect ----
 		this.buttonConnect.setText("Connexion");
+		this.buttonConnect.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		this.buttonConnect.setForeground(new Color(0, 134, 175));
 		this.buttonConnect.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				buttonConnectMouseClicked(e);
 			}
 		});
-		contentPane.add(this.buttonConnect, CC.xy(3, 1));
+		this.panelConnection.add(this.buttonConnect, CC.xy(1, 1));
 
 		//---- labelAccount ----
 		this.labelAccount.setText("Compte : ");
-		contentPane.add(this.labelAccount, CC.xy(7, 1));
+		this.panelConnection.add(this.labelAccount, CC.xy(1, 3));
 
 		//---- labelAccountValue ----
 		this.labelAccountValue.setText("text");
-		contentPane.add(this.labelAccountValue, CC.xywh(9, 1, 3, 1));
+		this.panelConnection.add(this.labelAccountValue, CC.xywh(3, 3, 5, 1));
 
 		//---- labelCalendar ----
 		this.labelCalendar.setText("Agenda : ");
-		contentPane.add(this.labelCalendar, CC.xy(13, 1));
+		this.panelConnection.add(this.labelCalendar, CC.xy(1, 5));
 
 		//---- comboCalendars ----
+		this.comboCalendars.setMinimumSize(new Dimension(54, 15));
 		this.comboCalendars.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				comboCalendarsActionPerformed(e);
 			}
 		});
-		contentPane.add(this.comboCalendars, CC.xy(15, 1));
+		this.panelConnection.add(this.comboCalendars, CC.xywh(3, 5, 3, 1));
+		contentPane.add(this.panelConnection, CC.xywh(15, 1, 3, 3));
 
 		//---- monthChooser ----
 		this.monthChooser.addChangeListener(new ChangeListener() {
@@ -1084,7 +1103,7 @@ public class MainWindow extends JFrame implements KeyListener, WindowListener
 				monthChooserStateChanged(e);
 			}
 		});
-		contentPane.add(this.monthChooser, CC.xywh(3, 3, 1, 3));
+		contentPane.add(this.monthChooser, CC.xy(3, 3));
 
 		//---- yearChooser ----
 		this.yearChooser.addChangeListener(new ChangeListener() {
@@ -1093,11 +1112,18 @@ public class MainWindow extends JFrame implements KeyListener, WindowListener
 				yearChooserStateChanged(e);
 			}
 		});
-		contentPane.add(this.yearChooser, CC.xywh(7, 3, 1, 3));
+		contentPane.add(this.yearChooser, CC.xy(5, 3));
+		contentPane.add(this.dayChooser, CC.xywh(3, 5, 11, 3));
+
+		//======== panelScheduleFunction ========
+		this.panelScheduleFunction.setLayout(new FormLayout(
+			"default, 2*($lcgap, 10dlu), $lcgap, default:grow",
+			"default, $lgap, fill:default:grow, $lgap, default, $lgap, fill:default:grow"));
+		((FormLayout)this.panelScheduleFunction.getLayout()).setColumnGroups(new int[][] {{3, 5}});
 
 		//---- label3 ----
 		label3.setText("Type d'horaires");
-		contentPane.add(label3, CC.xy(17, 5));
+		this.panelScheduleFunction.add(label3, CC.xy(1, 1));
 
 		//---- buttonAddSchedule ----
 		buttonAddSchedule.setText("+");
@@ -1109,7 +1135,7 @@ public class MainWindow extends JFrame implements KeyListener, WindowListener
 				buttonAddScheduleActionPerformed(e);
 			}
 		});
-		contentPane.add(buttonAddSchedule, CC.xy(19, 5));
+		this.panelScheduleFunction.add(buttonAddSchedule, CC.xy(3, 1));
 
 		//---- buttonRemoveSchedule ----
 		buttonRemoveSchedule.setText("-");
@@ -1121,16 +1147,15 @@ public class MainWindow extends JFrame implements KeyListener, WindowListener
 				buttonRemoveScheduleActionPerformed(e);
 			}
 		});
-		contentPane.add(buttonRemoveSchedule, CC.xy(21, 5));
-		contentPane.add(this.dayChooser, CC.xywh(3, 7, 13, 7));
+		this.panelScheduleFunction.add(buttonRemoveSchedule, CC.xy(5, 1));
 
 		//======== scrollPane2 ========
 		scrollPane2.setViewportView(this.tableSchedule);
-		contentPane.add(scrollPane2, CC.xywh(17, 7, 7, 1));
+		this.panelScheduleFunction.add(scrollPane2, CC.xywh(1, 3, 7, 1));
 
 		//---- label4 ----
 		label4.setText("Fonction");
-		contentPane.add(label4, CC.xy(17, 9));
+		this.panelScheduleFunction.add(label4, CC.xy(1, 5));
 
 		//---- buttonAddFunction ----
 		buttonAddFunction.setText("+");
@@ -1142,7 +1167,7 @@ public class MainWindow extends JFrame implements KeyListener, WindowListener
 				buttonAddFunctionActionPerformed(e);
 			}
 		});
-		contentPane.add(buttonAddFunction, CC.xy(19, 9));
+		this.panelScheduleFunction.add(buttonAddFunction, CC.xy(3, 5));
 
 		//---- buttonRemoveFunction ----
 		buttonRemoveFunction.setText("-");
@@ -1154,23 +1179,24 @@ public class MainWindow extends JFrame implements KeyListener, WindowListener
 				buttonRemoveFunctionActionPerformed(e);
 			}
 		});
-		contentPane.add(buttonRemoveFunction, CC.xy(21, 9));
+		this.panelScheduleFunction.add(buttonRemoveFunction, CC.xy(5, 5));
 
 		//======== scrollPane3 ========
 		scrollPane3.setViewportView(this.tableFunction);
-		contentPane.add(scrollPane3, CC.xywh(17, 11, 7, 3));
-		contentPane.add(this.labelMessage, CC.xywh(3, 15, 21, 1));
-		setSize(920, 510);
+		this.panelScheduleFunction.add(scrollPane3, CC.xywh(1, 7, 7, 1));
+		contentPane.add(this.panelScheduleFunction, CC.xywh(15, 5, 3, 3));
+		contentPane.add(this.labelMessage, CC.xywh(3, 9, 15, 1));
+		setSize(825, 440);
 		setLocationRelativeTo(getOwner());
 		// JFormDesigner - End of component initialization  //GEN-END:initComponents
 	}
 
 	private void myInit()
 	{
-//		// Vire le fuckin watermark
-//		for(PropertyChangeListener listener:this.panelLeft.getPropertyChangeListeners())
-//			this.panelLeft.removePropertyChangeListener(listener);
-//		this.panelLeft.setBorder(null);
+		// Vire le fuckin watermark
+		for(PropertyChangeListener listener:this.panelConnection.getPropertyChangeListeners())
+			this.panelConnection.removePropertyChangeListener(listener);
+		this.panelConnection.setBorder(null);
 		
 		// Cache les labels inutils lorsqu'on n'est pas encore connecté
 //		this.labelAccount.setVisible(false);
@@ -1323,6 +1349,7 @@ public class MainWindow extends JFrame implements KeyListener, WindowListener
 	\* ---------------------------------------- */
 	// JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
 	// Generated using JFormDesigner Evaluation license - yggpuduku
+	private JPanel panelConnection;
 	private JLabel buttonConnect;
 	private JLabel labelAccount;
 	private JLabel labelAccountValue;
@@ -1331,6 +1358,7 @@ public class MainWindow extends JFrame implements KeyListener, WindowListener
 	private MyMonthPicker monthChooser;
 	private MyYearPicker yearChooser;
 	private JDayChooser dayChooser;
+	private JPanel panelScheduleFunction;
 	private JTable tableSchedule;
 	private JTable tableFunction;
 	private TimedLabel labelMessage;

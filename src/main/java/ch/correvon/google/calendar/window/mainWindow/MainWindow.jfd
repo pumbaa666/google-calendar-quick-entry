@@ -4,53 +4,61 @@ new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
-			"$columnSpecs": "unrelgap, labelcompgap, default, labelcompgap, default, labelcompgap, right:default, labelcompgap, default, labelcompgap, default:grow, labelcompgap, default, labelcompgap, 124dlu, labelcompgap, default, labelcompgap, default, labelcompgap, default, labelcompgap, 58dlu, labelcompgap, unrelgap"
-			"$rowSpecs": "default, linegap, fill:7dlu, linegap, 10dlu, linegap, top:default:grow(0.66), linegap, 10dlu, linegap, default, linegap, default:grow(0.34), linegap, 13dlu"
-			"$rowGroupIds": "0, 0, 0, 0, 2, 0, 1, 0, 2, 0, 0, 0, 1, 0, 0"
-			"$columnGroupIds": "0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2, 0, 0, 0, 0"
+			"$columnSpecs": "unrelgap, labelcompgap, default, labelcompgap, right:default, labelcompgap, default, labelcompgap, default:grow, labelcompgap, default, labelcompgap, 124dlu, labelcompgap, default:grow, labelcompgap, 58dlu:grow(0.33), labelcompgap, unrelgap"
+			"$rowSpecs": "fill:30dlu, linegap, fill:25dlu, linegap, fill:default:grow, linegap, default, linegap, unrelgap"
 		} ) {
 			name: "this"
 			"$sizePolicy": 1
 			"$locationPolicy": 0
 			"defaultCloseOperation": 3
-			add( new FormComponent( "javax.swing.JLabel" ) {
-				name: "buttonConnect"
-				"text": "Connexion"
-				"cursor": new java.awt.Cursor( 12 )
-				"foreground": new java.awt.Color( 0, 134, 175, 255 )
-				addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "buttonConnectMouseClicked", true ) )
-			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridX": 3
-				"gridY": 1
-			} )
-			add( new FormComponent( "javax.swing.JLabel" ) {
-				name: "labelAccount"
-				"text": "Compte : "
-			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridX": 7
-			} )
-			add( new FormComponent( "javax.swing.JLabel" ) {
-				name: "labelAccountValue"
-				"text": "text"
-			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridX": 9
-				"gridWidth": 3
-			} )
-			add( new FormComponent( "javax.swing.JLabel" ) {
-				name: "labelCalendar"
-				"text": "Agenda : "
-			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridX": 13
-			} )
-			add( new FormComponent( "javax.swing.JComboBox" ) {
-				name: "comboCalendars"
-				"minimumSize": new java.awt.Dimension( 54, 15 )
-				auxiliary() {
-					"JavaCodeGenerator.typeParameters": "CalendarListEntry"
-				}
-				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "comboCalendarsActionPerformed", true ) )
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
+				"$columnSpecs": "default, labelcompgap, default, labelcompgap, default:grow(0.75), labelcompgap, default:grow"
+				"$rowSpecs": "default, linegap, default, linegap, default, linegap, default"
+			} ) {
+				name: "panelConnection"
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "buttonConnect"
+					"text": "Connexion"
+					"cursor": new java.awt.Cursor( 12 )
+					"foreground": new java.awt.Color( 0, 134, 175, 255 )
+					addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "buttonConnectMouseClicked", true ) )
+				}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "labelAccount"
+					"text": "Compte : "
+				}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+					"gridY": 3
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "labelAccountValue"
+					"text": "text"
+				}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+					"gridX": 3
+					"gridWidth": 5
+					"gridY": 3
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "labelCalendar"
+					"text": "Agenda : "
+				}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+					"gridY": 5
+				} )
+				add( new FormComponent( "javax.swing.JComboBox" ) {
+					name: "comboCalendars"
+					"minimumSize": new java.awt.Dimension( 54, 15 )
+					auxiliary() {
+						"JavaCodeGenerator.typeParameters": "CalendarListEntry"
+					}
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "comboCalendarsActionPerformed", true ) )
+				}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+					"gridX": 3
+					"gridY": 5
+					"gridWidth": 3
+				} )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 15
+				"gridWidth": 3
+				"gridHeight": 3
 			} )
 			add( new FormComponent( "ch.correvon.google.calendar.components.date.MyMonthPicker" ) {
 				name: "monthChooser"
@@ -58,129 +66,130 @@ new FormModel {
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 3
 				"gridY": 3
-				"gridHeight": 3
 			} )
 			add( new FormComponent( "ch.correvon.google.calendar.components.date.MyYearPicker" ) {
 				name: "yearChooser"
 				addEvent( new FormEvent( "javax.swing.event.ChangeListener", "stateChanged", "yearChooserStateChanged", true ) )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridX": 7
+				"gridX": 5
 				"gridY": 3
-				"gridHeight": 3
-			} )
-			add( new FormComponent( "javax.swing.JLabel" ) {
-				name: "label3"
-				"text": "Type d'horaires"
-				auxiliary() {
-					"JavaCodeGenerator.variableLocal": true
-				}
-			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridX": 17
-				"gridY": 5
-			} )
-			add( new FormComponent( "javax.swing.JButton" ) {
-				name: "buttonAddSchedule"
-				"text": "+"
-				"margin": &Insets0 new java.awt.Insets( 0, 2, 0, 2 )
-				"toolTipText": "Ajouter un horaire"
-				auxiliary() {
-					"JavaCodeGenerator.variableLocal": true
-				}
-				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "buttonAddScheduleActionPerformed", true ) )
-			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridX": 19
-				"gridY": 5
-			} )
-			add( new FormComponent( "javax.swing.JButton" ) {
-				name: "buttonRemoveSchedule"
-				"text": "-"
-				"margin": #Insets0
-				"toolTipText": "Supprimer un horaire"
-				auxiliary() {
-					"JavaCodeGenerator.variableLocal": true
-				}
-				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "buttonRemoveScheduleActionPerformed", true ) )
-			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridY": 5
-				"gridX": 21
 			} )
 			add( new FormComponent( "com.toedter.calendar.JDayChooser" ) {
 				name: "dayChooser"
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 3
-				"gridY": 7
-				"gridWidth": 13
-				"gridHeight": 7
+				"gridY": 5
+				"gridWidth": 11
+				"gridHeight": 3
 			} )
-			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
-				name: "scrollPane2"
-				auxiliary() {
-					"JavaCodeGenerator.variableLocal": true
-				}
-				add( new FormComponent( "javax.swing.JTable" ) {
-					name: "tableSchedule"
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
+				"$columnSpecs": "default, labelcompgap, 10dlu, labelcompgap, 10dlu, labelcompgap, default:grow"
+				"$rowSpecs": "default, linegap, fill:default:grow, linegap, default, linegap, fill:default:grow"
+				"$columnGroupIds": "0, 0, 1, 0, 1, 0, 0"
+			} ) {
+				name: "panelScheduleFunction"
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "label3"
+					"text": "Type d'horaires"
+					auxiliary() {
+						"JavaCodeGenerator.variableLocal": true
+					}
+				}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "buttonAddSchedule"
+					"text": "+"
+					"margin": &Insets0 new java.awt.Insets( 0, 2, 0, 2 )
+					"toolTipText": "Ajouter un horaire"
+					auxiliary() {
+						"JavaCodeGenerator.variableLocal": true
+					}
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "buttonAddScheduleActionPerformed", true ) )
+				}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+					"gridX": 3
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "buttonRemoveSchedule"
+					"text": "-"
+					"margin": #Insets0
+					"toolTipText": "Supprimer un horaire"
+					auxiliary() {
+						"JavaCodeGenerator.variableLocal": true
+					}
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "buttonRemoveScheduleActionPerformed", true ) )
+				}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+					"gridX": 5
+				} )
+				add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+					name: "scrollPane2"
+					auxiliary() {
+						"JavaCodeGenerator.variableLocal": true
+					}
+					add( new FormComponent( "javax.swing.JTable" ) {
+						name: "tableSchedule"
+					} )
+				}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+					"gridY": 3
+					"gridWidth": 7
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "label4"
+					"text": "Fonction"
+					auxiliary() {
+						"JavaCodeGenerator.variableLocal": true
+					}
+				}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+					"gridY": 5
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "buttonAddFunction"
+					"text": "+"
+					"margin": #Insets0
+					"toolTipText": "Ajouter une fonction"
+					auxiliary() {
+						"JavaCodeGenerator.variableLocal": true
+					}
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "buttonAddFunctionActionPerformed", true ) )
+				}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+					"gridY": 5
+					"gridX": 3
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "buttonRemoveFunction"
+					"text": "-"
+					"margin": #Insets0
+					"toolTipText": "Supprimer une fonction"
+					auxiliary() {
+						"JavaCodeGenerator.variableLocal": true
+					}
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "buttonRemoveFunctionActionPerformed", true ) )
+				}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+					"gridY": 5
+					"gridX": 5
+				} )
+				add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+					name: "scrollPane3"
+					auxiliary() {
+						"JavaCodeGenerator.variableLocal": true
+					}
+					add( new FormComponent( "javax.swing.JTable" ) {
+						name: "tableFunction"
+					} )
+				}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+					"gridY": 7
+					"gridWidth": 7
 				} )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridX": 17
-				"gridY": 7
-				"gridWidth": 7
-			} )
-			add( new FormComponent( "javax.swing.JLabel" ) {
-				name: "label4"
-				"text": "Fonction"
-				auxiliary() {
-					"JavaCodeGenerator.variableLocal": true
-				}
-			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridY": 9
-				"gridX": 17
-			} )
-			add( new FormComponent( "javax.swing.JButton" ) {
-				name: "buttonAddFunction"
-				"text": "+"
-				"margin": #Insets0
-				"toolTipText": "Ajouter une fonction"
-				auxiliary() {
-					"JavaCodeGenerator.variableLocal": true
-				}
-				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "buttonAddFunctionActionPerformed", true ) )
-			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridY": 9
-				"gridX": 19
-			} )
-			add( new FormComponent( "javax.swing.JButton" ) {
-				name: "buttonRemoveFunction"
-				"text": "-"
-				"margin": #Insets0
-				"toolTipText": "Supprimer une fonction"
-				auxiliary() {
-					"JavaCodeGenerator.variableLocal": true
-				}
-				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "buttonRemoveFunctionActionPerformed", true ) )
-			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridY": 9
-				"gridX": 21
-			} )
-			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
-				name: "scrollPane3"
-				auxiliary() {
-					"JavaCodeGenerator.variableLocal": true
-				}
-				add( new FormComponent( "javax.swing.JTable" ) {
-					name: "tableFunction"
-				} )
-			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridX": 17
-				"gridY": 11
-				"gridWidth": 7
+				"gridX": 15
+				"gridY": 5
+				"gridWidth": 3
 				"gridHeight": 3
 			} )
 			add( new FormComponent( "ch.correvon.google.calendar.components.TimedLabel" ) {
 				name: "labelMessage"
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 3
-				"gridY": 15
-				"gridWidth": 21
+				"gridY": 9
+				"gridWidth": 15
 			} )
 			menuBar: new FormContainer( "javax.swing.JMenuBar", new FormLayoutManager( class javax.swing.JMenuBar ) ) {
 				name: "menuBar"
@@ -205,7 +214,7 @@ new FormModel {
 			}
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 5, 10 )
-			"size": new java.awt.Dimension( 920, 510 )
+			"size": new java.awt.Dimension( 825, 440 )
 		} )
 	}
 }
