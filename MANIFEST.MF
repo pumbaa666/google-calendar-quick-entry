@@ -20,5 +20,5 @@ Class-Path: ./lib/javax.jar
  ./lib/google-api/jetty-6.1.26.jar 
  ./lib/google-api/jetty-util-6.1.26.jar 
  ./lib/pumbaa/google-calendar-lib-1.0.0.jar
-Main-Class: ch.correvon.google.calendar.use.MainGoogleCalendar
+Main-Class: ch.correvon.google.calendar.use.MedicalGoogleCalendar
 

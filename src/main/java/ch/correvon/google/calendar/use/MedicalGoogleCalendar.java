@@ -23,10 +23,10 @@ public class MedicalGoogleCalendar
 
 	/*
 	 * TODO
-	 *	Capture d'écran pour github
-	 *	Readme
+	 *	better Readme
 	 *	exe
 	 *	tag 1.0
+	 *	maven
 	 *
 	 *	Ajuster les fonts (date du jour/summary) pour qu'on puisse mettre des noms de 5-10 lettres dans les rdv sur les boutons
 	 *
