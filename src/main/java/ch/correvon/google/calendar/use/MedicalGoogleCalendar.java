@@ -24,12 +24,7 @@ public class MedicalGoogleCalendar
 	/*
 	 * TODO
 	 *	better Readme
-	 *	exe
-	 *	tag 1.0
-	 *	maven
-	 *
 	 *	Ajuster les fonts (date du jour/summary) pour qu'on puisse mettre des noms de 5-10 lettres dans les rdv sur les boutons
-	 *
-	 * ne pas mettre le jour (de la date du jour) en surbrillance si on n'est pas sur le bon mois 
+	 *	ne pas mettre le jour (de la date du jour) en surbrillance si on n'est pas sur le bon mois 
 	 */
 }
