@@ -875,8 +875,7 @@ public class MainWindow extends JFrame implements KeyListener, WindowListener
 					}
 					catch(InterruptedException | ExecutionException e)
 					{
-						s_logger.error("Impossible de sélectionner l'agenda '"+calendarName+"'", e);
-						return;
+						// Rien, c'est géré juste après
 					}
 					
 					if(calendarId == null)
