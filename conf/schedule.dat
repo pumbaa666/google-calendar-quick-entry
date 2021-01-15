@@ -1,0 +1,5 @@
+s. am:Support du matin;07:30;12:00;65;255,0,0;EMAIL+960,;
+s. pm:Support de l'après-midi;13:30;18:00;80;204,102,255;POPUP+60,EMAIL+60,;
+MEP:Mise en production;11:00;20:00;69;102,0,102;
+s. midi:Support de midi;12:00;13:30;77;102,255,102;
+Vac:Vacances \o/;08:00;17:00;86;51,102,255;

@@ -1326,10 +1326,9 @@ public class MainWindow extends JFrame implements KeyListener, WindowListener
 	\* ---------------------------------------- */
 	private static Log s_logger = LogFactory.getLog(MainWindow.class);
 
-	private static final String DATA_PATH = System.getProperty("user.dir") + File.separator + "data" + File.separator;
-	private static final String SCHEDULE_FILE_PATH = DATA_PATH + "schedule.dat";
-	private static final String FUNCTION_FILE_PATH = DATA_PATH + "function.dat";
-	public static final String PREF_FILE_PATH = DATA_PATH + "preferences.dat";
+	private static final String SCHEDULE_FILE_PATH = "conf/schedule.dat";
+	private static final String FUNCTION_FILE_PATH = "conf/function.dat";
+	public static final String PREF_FILE_PATH = "conf/preferences.dat";
 
 	private static final SimpleDateFormat DAY_SDF = new SimpleDateFormat("dd");
 	private static final SimpleDateFormat MONTH_SDF = new SimpleDateFormat("MM");
